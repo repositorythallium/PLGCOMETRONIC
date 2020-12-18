@@ -3,7 +3,7 @@ const express = require("express");
 const application = require("../../application");
 const applicationRouter = express.Router();
 
-const ProdutoService = require("../service/produto.service")
+const ProdutoService = require("../service/produto.service");
 
 /**
  * ROTA INFORMATIVA

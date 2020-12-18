@@ -1,5 +1,4 @@
 const connectionMySQL = require("../connection/mysql.connection");
-const ProdutoService = require("../service/produto.service");
 
 const ProdutoRepository = {
     findAll: findAll,
@@ -16,13 +15,12 @@ function findAll(ProdutoFiltro) {
         QUERY = QUERY.concat(WHERE);
     }
     connectionMySQL.query(QUERY, function (error, result, field) {
-        console.log(result.length);
-        if((result != null || result != undefined) && result.length > 0) {
-            ProdutoFiltro.response.status(200).json({ produtoList: result });
-        } else if(result.length == 0) { 
-            ProdutoFiltro.response.status(404).json({ "mensagem": "Não existem dados cadastrados na tabela de Produtos!"});
-        } else {
+        if(error) {
             ProdutoFiltro.response.status(404).json({ "mensagem": "Não foi possível retornar os dados para a consuta realizada!", "error": error.sqlMessage });
+        } else if((result != null || result != undefined) && result.length > 0) {
+            ProdutoFiltro.response.status(200).json({ produtoList: result });
+        } else if(result.length == 0) {
+            ProdutoFiltro.response.status(404).json({ "mensagem": "Não existem dados cadastrados na tabela de Produtos!" });
         }
     });
 };
