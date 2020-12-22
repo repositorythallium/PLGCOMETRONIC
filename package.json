@@ -1,8 +1,8 @@
 {
-  "name": "PLGCOMETRONIC_WEB",
+  "name": "PLGCOMETRONIC",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "nodemon ./resource/configuration/application.configuration.js",
   "scripts": {
     "start": "nodemon ./resource/configuration/application.configuration.js"
   },
@@ -13,5 +13,8 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
