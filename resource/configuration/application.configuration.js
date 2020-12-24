@@ -7,6 +7,6 @@ application.use(function (req, res, next) {
     next();
 });
 
-application.listen(process.env.PORT || "3000", () => {
+application.listen(process.env.PORT || "9090", () => {
     // console.log("Servidor executando na porta 3000");
 });
