@@ -7,6 +7,7 @@ const ProdutoService = {
     remove: remove,
     merge: merge,
     insert: insert,
+    findOneCategoria: findOneCategoria,
 };
 
 function findAll(request, response) {
@@ -15,6 +16,10 @@ function findAll(request, response) {
 
 function findOne(request, response) {
     ProdutoRepository.findOne(configurarProdutoFiltro(request, response));
+};
+
+function findOneCategoria(request, response) {
+    ProdutoRepository.findOneCategoria(configurarProdutoFiltro(request, response));
 };
 
 function remove(request, response) {

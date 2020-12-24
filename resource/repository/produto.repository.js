@@ -6,6 +6,7 @@ const ProdutoRepository = {
     remove: remove,
     merge: merge,
     insert: insert,
+    findOneCategoria: findOneCategoria,
 }
 
 function findAll(ProdutoFiltro) {
@@ -36,6 +37,17 @@ function findOne(ProdutoFiltro) {
     });
 };
 
+function findOneCategoria(ProdutoFiltro) {
+  let QUERY = `SELECT * FROM TB_PRODUTO WHERE ID_CATEGORIA = ${ProdutoFiltro.request.params.codigo}`;
+  connectionMySQL.query(QUERY, function (error, result, field) {
+      if((result != null || result != undefined) && result.length > 0) {
+          ProdutoFiltro.response.status(200).json({ produtoList: result });
+      } else {
+          ProdutoFiltro.response.status(404).json({ "mensagem": `Não foi possível encontrar o produto com a categoria ${ProdutoFiltro.request.params.codigo}`});
+      }
+  });
+}
+
 function remove(ProdutoFiltro) {
     let QUERY = `DELETE FROM TB_PRODUTO WHERE CODIGO = ${ProdutoFiltro.request.params.codigo}`;
     connectionMySQL.query(QUERY, function(error, result, field) {
@@ -49,12 +61,12 @@ function remove(ProdutoFiltro) {
 
 function merge(request, response) {
     let ProdutoModel = request.body;
-    let QUERY = `UPDATE TB_PRODUTO SET 
+    let QUERY = `UPDATE TB_PRODUTO SET
         ID_CATEGORIA = ${ProdutoModel.idCategoria},
         NOME = '${ProdutoModel.nome}',
         DESCRICAO = '${ProdutoModel.descricao}',
-        URL_IMAGEM = '${ProdutoModel.urlImagem}', 
-        PRECO = ${ProdutoModel.preco}, 
+        URL_IMAGEM = '${ProdutoModel.urlImagem}',
+        PRECO = ${ProdutoModel.preco},
         QUANTIDADE_ESTOQUE = ${ProdutoModel.quantidadeEstoque}
         WHERE CODIGO = ${request.params.codigo}`;
     connectionMySQL.query(QUERY, function (error, result, field) {

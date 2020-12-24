@@ -4,6 +4,7 @@
         "MYSQL_PORT": "3306",
         "MYSQL_DATABASE": "PLGCOMETRONIC",
         "MYSQL_USERNAME": "root",
-        "MYSQL_PASSWORD": ""
+        "MYSQL_PASSWORD": "",
+        "PORTA_SERVIDOR": "9090"
     }
 }

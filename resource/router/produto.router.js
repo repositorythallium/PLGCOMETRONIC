@@ -6,13 +6,6 @@ const applicationRouter = express.Router();
 const ProdutoService = require("../service/produto.service");
 
 /**
- * ROTA INFORMATIVA
- */
-applicationRouter.get("/", function (request, response) {
-    response.json({ "nome-sistema": "Plataforma de Lançamento - Gerenciador de Comércio Eletrônico" });
-});
-
-/**
  * FINDALL
  * Responsavel por recuperar todos os dados do banco na tabela Produto
  */
@@ -26,6 +19,14 @@ applicationRouter.get("/produto", function (request, response) {
  */
 applicationRouter.get("/produto/:codigo", function (request, response) {
     ProdutoService.findOne(request, response);
+});
+
+/**
+ * FINDONE (CODIGO CATEGORIA)
+ * Responsavel por recuperar produtos por uma determinada categoria
+ */
+applicationRouter.get("/produto/categoria/:codigo", function (request, response) {
+    ProdutoService.findOneCategoria(request, response);
 });
 
 /**
